@@ -1,5 +1,6 @@
+package Geometria;
 
-public class Circulo extends Punto{
+public class Circulo extends Punto {
     public double radio;
 
     public Circulo(int x, int y, int r){
