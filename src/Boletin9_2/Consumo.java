@@ -62,5 +62,6 @@ public class Consumo {
         System.out.println("Litros: " + this.litros);
         System.out.println("VMed: " + this.vMed);
         System.out.println("PGas: " + this.pGas);
+
     }
 }
