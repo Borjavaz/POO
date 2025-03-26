@@ -60,6 +60,32 @@ public class Lista {
         insertarFinal(num);
     }
 
+    public void borrarElemento(int posicion) {
+        if (posicion < 0 || posicion >= numElementos) {
+            throw new IndexOutOfBoundsException("Posición inválida");
+        }
+
+        int[] nuevoArreglo = new int[numElementos - 1];
+        System.arraycopy(tabla, 0, nuevoArreglo, 0, posicion);
+        System.arraycopy(tabla, posicion + 1, nuevoArreglo, posicion, numElementos - posicion - 1);
+
+        tabla = nuevoArreglo;
+        numElementos--;
+    }
+    public void eliminarUltimo() {
+        if (numElementos == 0) {
+            System.out.println("La lista está vacía, no se puede eliminar ningún elemento.");
+            return;
+        }
+
+        int[] nuevaTabla = new int[numElementos - 1];
+        System.arraycopy(tabla, 0, nuevaTabla, 0, numElementos - 1);
+
+        tabla = nuevaTabla;
+        numElementos--;
+    }
+
+
     public int obtenerElemento(int indice) {
         if (indice < 0 || indice >= this.numElementos) {
             System.out.println("Índice fuera de rango");
@@ -124,6 +150,24 @@ public class Lista {
             lista.mostrar();
         }
 
+        System.out.println("¿Deseas eliminar el último elemento? (s/n)");
+        if (scanner.next().equalsIgnoreCase("s")) {
+            lista.eliminarUltimo();
+            System.out.println("Lista después de eliminar el último elemento:");
+            lista.mostrar();
+        }
+
+
+        System.out.println("¿Deseas eliminar un elemento en un índice específico? (s/n)");
+        if (scanner.next().equalsIgnoreCase("s")) {
+            System.out.println("Introduce el índice:");
+            int indice = scanner.nextInt();
+            System.out.println("Introduce el elemento a insertar:");
+            lista.borrarElemento(indice - 1);
+            System.out.println("Lista después de la inserción:");
+            lista.mostrar();
+        }
+
         System.out.println("¿Deseas buscar un elemento? (s/n)");
         if (scanner.next().equalsIgnoreCase("s")) {
             System.out.println("Introduce el elemento a buscar:");
@@ -140,7 +184,6 @@ public class Lista {
                 System.out.println("El elemento en la posición " + indice + " es " + elemento);
             }
         }
-
         scanner.close();
     }
 }
